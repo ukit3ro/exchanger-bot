@@ -33,3 +33,4 @@ class Convertor:
         new_price = round(new_price, 3)
         message =  f"Цена {amount} {base} в {sym} : {new_price}"
         return message
+        
