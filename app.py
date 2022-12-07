@@ -1,10 +1,11 @@
+#импортируем необходимую библиотеку TeleBot для взаимодействия с телеграм ботом.
 import telebot
 from telebot import types
-
+#выполняем импорты классов и данных из файлов проекта.
 from config import *
 from utils import Convertor, APIException
 
-
+#создание кнопок, для удобства, особенно в мобильной версии.
 def create_markup(base = None):
     markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
     buttons = []
@@ -16,19 +17,19 @@ def create_markup(base = None):
     return  markup
 
 bot = telebot.TeleBot(TOKEN)
-
+#функция для ответа на команды /start и /help
 @bot.message_handler(commands=['start', 'help'])
 def start(message: telebot.types.Message):
     text = "Приветствие!"
     bot.send_message(message.chat.id, text)
-
+#функция для вывода списка доступных валют
 @bot.message_handler(commands=['values'])
 def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
     for i in exchanges.keys():
         text = '\n'.join((text, i))
     bot.send_message(message.chat.id, text)
-
+#функции для запроса данных у пользователя
 @bot.message_handler(commands=['convert'])
 def values(message: telebot.types.Message):
     text = 'Выберите валюту, из которой конвертровать:'
